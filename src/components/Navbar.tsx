@@ -10,8 +10,8 @@ function Navbar() {
         <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           Home
         </Typography>
-        <Typography variant="h6" component={Link} to="/user" style={{ textDecoration: 'none', color: 'inherit', marginLeft: '20px' }}>
-          User Details
+        <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit', marginLeft: '20px' }}>
+          Users
         </Typography>
       </Toolbar>
     </AppBar>

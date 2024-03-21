@@ -8,7 +8,7 @@ function MainRoutes() {
   return ( <BrowserRouter>
     <Routes>
       <Route path="/" element={<Users />} />
-      <Route path="/user" element={<UserDetails />} />
+      <Route path="/user/:userId" element={<UserDetails />} />
     </Routes>
   </BrowserRouter>
   );
