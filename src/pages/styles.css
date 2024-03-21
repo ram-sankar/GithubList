@@ -5,8 +5,13 @@
     margin-top: 30px;
 }
 .userTable {
-    width: 50% !important;
+    width: 40% !important;
 }
 .heading {
     margin-top: 20px !important;
+}
+.userAvatar {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
 }

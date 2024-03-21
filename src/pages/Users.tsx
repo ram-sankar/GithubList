@@ -10,51 +10,65 @@ import Paper from '@mui/material/Paper';
 import Navbar from '../components/Navbar';
 import "./styles.css"
 import Text from '../components/Text';
+import { useEffect, useState } from 'react';
+import { getUserList } from '../services/user';
+import { User } from '../shared/modal';
+import { Button } from '@mui/material';
+import { Image } from '@mui/icons-material';
 
 
 function Users() {
+    const [userList, setUserList] = useState<User[]>([])
+
+    useEffect(() => {
+        loadInitialData()
+    }, [])
+
+    const loadInitialData = async () => {
+        const users = await getUserList()
+        console.log(users)
+        setUserList(users)
+    }
 
 
-const UserTable = () => {
-  return (
-    <TableContainer component={Paper} className='userTable'>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-}
+    const UserTable = () => {
+        return (
+            <TableContainer component={Paper} className='userTable'>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                <TableRow>
+                    <StyledTableCell align="center">Avatar</StyledTableCell>
+                    <StyledTableCell align="center">Name</StyledTableCell>
+                    <StyledTableCell align="center">Action</StyledTableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                {userList.map((user) => (
+                    <StyledTableRow key={user.id}>
+                        <StyledTableCell align="center">
+                            <img src={user.avatar_url} className='userAvatar'/>
+                        </StyledTableCell>
+                        <StyledTableCell align="center">{user.login}</StyledTableCell>
+                        <StyledTableCell align="center">
+                            <Button variant='contained'>View</Button>    
+                        </StyledTableCell>
+                    </StyledTableRow>
+                ))}
+                </TableBody>
+            </Table>
+            </TableContainer>
+        );
+    }
 
-  return (
-    <div>
-        <Navbar />
-        <Text variant="h3" className='heading'>Github User List</Text>
-        <div className='tableWrapper'>
-            {UserTable()}
+    return (
+        <div>
+            <Navbar />
+            <Text variant="h3" className='heading'>Github User List</Text>
+            <div className='tableWrapper'>
+                {UserTable()}
+            </div>
         </div>
-    </div>
-  );
+    );
 }
 
 export default Users;
@@ -79,21 +93,3 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       border: 0,
     },
   }));
-  
-  function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-  ) {
-    return { name, calories, fat, carbs, protein };
-  }
-  
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
