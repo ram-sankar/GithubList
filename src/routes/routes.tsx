@@ -9,7 +9,7 @@ function MainRoutes() {
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Users />} />
-      <Route path="/user/:userId" element={<UserDetails />} />
+      <Route path="/user/:userName" element={<UserDetails />} />
     </Routes>
   </BrowserRouter>
   );

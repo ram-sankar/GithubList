@@ -12,13 +12,15 @@ import "./styles.css"
 import Text from '../components/Text';
 import { useEffect, useState } from 'react';
 import { getUserList } from '../services/user';
-import { User } from '../shared/modal';
-import { Button } from '@mui/material';
+import { UserList } from '../shared/modal';
+import { Button, Typography } from '@mui/material';
 import { Image } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import AppButton from '../components/Button';
 
 
 function Users() {
-    const [userList, setUserList] = useState<User[]>([])
+    const [userList, setUserList] = useState<UserList[]>([])
 
     useEffect(() => {
         loadInitialData()
@@ -50,7 +52,9 @@ function Users() {
                         </StyledTableCell>
                         <StyledTableCell align="center">{user.login}</StyledTableCell>
                         <StyledTableCell align="center">
-                            <Button variant='contained'>View</Button>    
+                            <Text variant='subtitle1' component={Link} to={`/user/${user.login}`}>
+                                <AppButton variant='contained'>View</AppButton>    
+                            </Text>
                         </StyledTableCell>
                     </StyledTableRow>
                 ))}
@@ -64,7 +68,7 @@ function Users() {
         <div>
             <Navbar />
             <Text variant="h3" className='heading'>Github User List</Text>
-            <div className='tableWrapper'>
+            <div className='wrapper'>
                 {UserTable()}
             </div>
         </div>

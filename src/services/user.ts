@@ -22,3 +22,18 @@ export const getUserList = async () => {
         return [];
       }
 }
+
+export const getUserByUserName = async (userName: string) => {
+    try {
+        const baseUrl = getBaseUrl()
+        const response = await fetch(`${baseUrl}/users/${userName}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        return null;
+      }
+}
