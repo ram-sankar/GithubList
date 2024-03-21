@@ -1,7 +1,10 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import { useParams } from 'react-router-dom';
 
 function UserDetails() {
+    const params = useParams()
+    console.log(params)
   return (
     <div>
       <Navbar />

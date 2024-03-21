@@ -1,0 +1,12 @@
+.tableWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.userTable {
+    width: 50% !important;
+}
+.heading {
+    margin-top: 20px !important;
+}
